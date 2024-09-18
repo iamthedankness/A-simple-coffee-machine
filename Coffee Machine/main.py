@@ -61,26 +61,35 @@ def generate_report():
     print(f"Water: {resources["coffee"]}g")
     print(f"Money: ${machine_balance}")
 
+def process_coins():
+    quarter = float(input("insert quarters")) * 0.25
+    dimes = float(input("insert dimes")) * 0.10
+    nickles = float(input("insert nickles")) * 0.05
+    pennies = float(input("insert pennies")) * 0.01
+    user_money = quarter + dimes + nickles + pennies
+    return user_money
 
+
+
+def make_coffee(choice):
+    if choice == "espresso" or choice == "latte" or choice == "cappuccino":
+        if check_machine_resources(choice):
+
+            user_money = process_coins()
+            print(check_user_funds_serve(user_money, choice))
+        else:
+            print("Not enough resources in machine")
+    elif choice == "report":
+        generate_report()
 user_choice="on"
 while user_choice!="off":
 
     user_choice = input("What would you like? (espresso/latte/cappuccino):" ).lower()
 
     print(user_choice)
+    make_coffee(user_choice)
 
-    if user_choice=="espresso" or user_choice=="latte" or user_choice=="cappuccino":
-        if check_machine_resources(user_choice):
-            quarter = float(input("insert quarters")) * 0.25
-            dimes = float(input("insert dimes")) * 0.10
-            nickles = float(input("insert nickles")) * 0.05
-            pennies = float(input("insert pennies")) * 0.01
-            user_money = quarter + dimes + nickles + pennies
-            print(check_user_funds_serve(user_money,user_choice))
-        else:
-            print("Not enough resources in machine")
-    elif user_choice=="report":
-        generate_report()
+
 
 
 
